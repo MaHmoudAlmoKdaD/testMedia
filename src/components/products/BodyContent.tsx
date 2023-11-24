@@ -2,7 +2,6 @@ import axios from "axios"
 import Cards from "./Cards"
 import Filter from "./Filter"
 import { useEffect, useState } from 'react'
-import React from "react"
 
 type Props = {}
 
@@ -21,11 +20,12 @@ const BodyContent = (props: Props) => {
     const [searchCompany, setSearchCompany] = useState("")
     const [searchName, setSearchName] = useState("")
     const [freeShopping, setFreeShopping] = useState(false)
-    
+
     //get data from api
     useEffect(() => {
         axios.get('https://course-api.com/react-store-products')
             .then((res) => {
+                console.log(res.data)
                 setData(res.data)
                 setLimitProducts(res.data);
             })
@@ -47,7 +47,6 @@ const BodyContent = (props: Props) => {
   * with applying the functionality
   */
     useEffect(() => {
-        console.log(freeShopping)
         if (searchCategory || searchPrice || searchColor || searchCompany || searchName) {
             setData(
                 limitProducts.filter((product: any) => {
@@ -78,8 +77,8 @@ const BodyContent = (props: Props) => {
                     }
                     if (freeShopping) {
                         verdict = verdict &&
-                        product?.shipping == freeShopping
-                            
+                            product?.shipping == freeShopping
+
                     }
                     if (searchColor) {
                         if (searchColor == 'All') {
@@ -150,6 +149,16 @@ const BodyContent = (props: Props) => {
         setColors(uniqueArray)
     }
 
+    const sortByF = (value: any) => {
+        let sortedProducts: any;
+        if (value == 'highest') {
+            sortedProducts = data.slice().sort((a: any, b: any) => a.price - b.price);
+            setData(sortedProducts)
+        }else{
+            sortedProducts = data.slice().sort((a: any, b: any) => b.price - a.price);
+            setData(sortedProducts)
+        }
+    }
 
     return (
         <div className="container mx-auto px-4 mt-10">
@@ -166,7 +175,7 @@ const BodyContent = (props: Props) => {
                     setFreeShopping={setFreeShopping}
                 />
 
-                <Cards data={data} />
+                <Cards data={data} sortByF={sortByF} />
             </div>
         </div>
     )

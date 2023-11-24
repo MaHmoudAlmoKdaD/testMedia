@@ -1,11 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/CardContext'
 
 type Props = {}
 
 const Header = () => {
+    const { cart } = useContext(CartContext)!;
+
     return (
         <>
             <div className='container mx-auto px-4 '>
@@ -26,13 +29,16 @@ const Header = () => {
 
                     <div className='w-1/3'>
                         <div className=' flex justify-end items-center'>
-                            <div className='relative flex items-center cursor-pointer'>
-                                <p>Cart</p>
-                                <FontAwesomeIcon className="mx-1" icon={faCartShopping} />
-                                <div className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-3 h-3 flex items-center justify-center">
-                                    <span className="text-xs font-semibold">0</span>
+                            <Link to={"/checkout"}>
+                                <div className='relative flex items-center cursor-pointer'>
+                                    <p>Cart</p>
+
+                                    <FontAwesomeIcon className="mx-1" icon={faCartShopping} />
+                                    <div className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-3 h-3 flex items-center justify-center">
+                                        <span className="text-xs font-semibold">{cart.length}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                             <div className='ml-2 flex  items-center cursor-pointer'>
                                 <p>Login</p>
                                 <FontAwesomeIcon className="mx-1" icon={faUser} />

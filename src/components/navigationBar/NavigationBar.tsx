@@ -7,7 +7,7 @@ const NavigationBar = (props: Props) => {
 
 
     return (
-        <div className='bg-stone-300'>
+        <div className='bg-stone-400'>
             <div className='container mx-auto px-4 '>
                 <div className='h-20 flex items-center'>
                     <Link to={'#'} className="text-stone-600 hover:underline 2text-lg font-bold">Home</Link>

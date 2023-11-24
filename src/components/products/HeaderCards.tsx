@@ -2,9 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSort, faArrowDownShortWide } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 
-type Props = {}
+type Props = {
+    sortByF: any;
 
-const HeaderCards = (props: Props) => {
+}
+
+const HeaderCards = ({ sortByF }: Props) => {
     return (
         <div className='flex w-full items-center justify-between'>
             <div className='flex w-3/12'>
@@ -20,6 +23,9 @@ const HeaderCards = (props: Props) => {
                         name="company"
                         id="company"
                         className='mt-2 border-none outline-none bg-slate-200 rounded-sm p-2'
+                        onChange={(e)=>{
+                            sortByF(e.target.value)
+                        }}
                     >
                         <option value="lowest">Price (Lowest)</option>
                         <option value="highest">Price (Highest)</option>
