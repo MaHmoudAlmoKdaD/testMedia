@@ -16,6 +16,21 @@ const cartReducer = (state: any, action: { type: string; payload?: any }): any =
         ...state,
         cart: state.cart.filter((item: any) => item.id !== action.payload),
       };
+    case 'INCREASE_QUANTITY':
+      return {
+        ...state,
+        cart: state.cart.map((item: any) =>
+          item.id === action.payload ? { ...item, quantity: item.quantity + 1 } : item
+        ),
+      };
+    case 'DECREASE_QUANTITY':
+      return {
+        ...state,
+        cart: state.cart.map((item: any) =>
+          item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item
+        ),
+      };
+
     default:
       return state;
   }
@@ -32,8 +47,22 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: productId });
   };
 
+  const increaseQuantity = (productId: number) => {
+    dispatch({ type: 'INCREASE_QUANTITY', payload: productId });
+  };
+
+  const decreaseQuantity = (productId: number) => {
+    dispatch({ type: 'DECREASE_QUANTITY', payload: productId });
+  };
+
   return (
-    <CartContext.Provider value={{ cart: state.cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{
+      cart: state.cart,
+      addToCart,
+      removeFromCart,
+      increaseQuantity,
+      decreaseQuantity
+    }}>
       {children}
     </CartContext.Provider>
   );

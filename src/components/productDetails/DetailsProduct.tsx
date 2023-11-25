@@ -111,7 +111,7 @@ const DetailsProduct = ({ data }: Props) => {
 
             <button
                 onClick={() => {
-                    addToCart(data)
+                    addToCart({...data, quantity})
                     navigate("/products")
                 }}
                 className='rounded-lg bg-stone-500 mt-5 mb-20 p-2 px-4 text-white'

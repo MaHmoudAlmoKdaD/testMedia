@@ -9,7 +9,7 @@ type Props = {
 
 const BodyContent = (props: Props) => {
     const [quantity, setQuantity] = useState(1)
-    const { cart, removeFromCart } = useContext(CartContext)!;
+    const { cart, removeFromCart, decreaseQuantity, increaseQuantity } = useContext(CartContext)!;
     const navigate = useNavigate();
 
     const removeAll = () => {
@@ -36,13 +36,13 @@ const BodyContent = (props: Props) => {
                     {
                         cart && cart.length > 0 && cart.map((c: any) => {
                             return <ul className='mt-5 grid grid-cols-4 items-center'>
-                                <li className='flex items-center'>
+                                <li className='block sm:flex items-center'>
                                     <img
                                         className='w-16 h-16'
                                         src={c.images[0].url} alt="image" />
                                     <div className='mx-2'>
                                         <p>{c.name}</p>
-                                        <div className='flex items-center'>
+                                        <div className='block sm:flex items-center'>
                                             <p className='text-gray-500'>color:</p>
                                             <div className={` mx-2 w-4 h-4 rounded-full bg-[${c?.colors[0]}]`}></div>
                                         </div>
@@ -58,10 +58,12 @@ const BodyContent = (props: Props) => {
                                         <FontAwesomeIcon
                                             className='cursor-pointer'
                                             icon={faMinus}
+                                            onClick={() => decreaseQuantity(c.id)}
                                         />
-                                        <p className='text-xl font-bold'>{quantity}</p>
+                                        <p className='text-xl font-bold'>{c?.quantity}</p>
                                         <FontAwesomeIcon
                                             className='cursor-pointer'
+                                            onClick={() => increaseQuantity(c.id)}
                                             icon={faPlus}
                                         />
                                     </div>
