@@ -18,7 +18,7 @@ const Filter = ({ categories, companies, colors, setSearchCategory,
     setSearchPrice, setSearchColor, setSearchCompany, setSearchName, setFreeShopping
 }: Props) => {
     const [price, setPrice] = useState<number>(200000)
-    
+
     const setCategory = (cat: string) => {
         setSearchCategory(cat)
     }
@@ -62,7 +62,7 @@ const Filter = ({ categories, companies, colors, setSearchCategory,
 
             {/* Category */}
             <div className='mt-3 grid grid-cols-2  md:grid-cols-3 lg:block'>
-           
+
                 <div>
                     <p className='text-stone-400'>Category</p>
                     <ul>
@@ -117,7 +117,9 @@ const Filter = ({ categories, companies, colors, setSearchCategory,
                             colors.map((c: any, index: any) => {
                                 if (c) return <li
                                     onClick={() => setColor(c)}
-                                    key={index} className={`cursor-pointer w-6 h-6 rounded-full mx-1 bg-[${c.toString()}]`}></li>
+                                    key={index}
+                                    style={{ backgroundColor: c }}
+                                    className={`cursor-pointer w-6 h-6 rounded-full mx-1 `}></li>
                             })
                         }
                     </ul>

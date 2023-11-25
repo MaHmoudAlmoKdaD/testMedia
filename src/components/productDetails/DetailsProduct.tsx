@@ -11,7 +11,7 @@ type Props = {
 const DetailsProduct = ({ data }: Props) => {
 
     const [quantity, setQuantity] = useState(1)
-    const { addToCart } = useContext(CartContext)!;
+    const { addToCart, updateColor } = useContext(CartContext)!;
 
     const navigate = useNavigate();
 
@@ -68,7 +68,7 @@ const DetailsProduct = ({ data }: Props) => {
             <h1 className='text-4xl'>{data?.name}</h1>
             <div className='flex mt-3'>
                 {rating(data?.stars)}
-                <p className='mxdata?.colors-3'>({data?.reviews}) Customer Reviews</p>
+                <p className='mx-2'>({data?.reviews}) Customer Reviews</p>
             </div>
             <p className='mt-3 text-stone-400'>${data?.price}</p>
             <p className='mt-3'>{data?.description}</p>
@@ -89,7 +89,10 @@ const DetailsProduct = ({ data }: Props) => {
                 <ul className='flex'>
                     {
                         data && data?.colors?.map((c: string) => {
-                            return <li className={`cursor-pointer w-6 h-6 rounded-full mx-1 bg-[${c}]`}></li>
+                            return <li
+                                onClick={() => updateColor(data?.id, c)}
+                                style={{ backgroundColor: c }}
+                                className={`cursor-pointer w-6 h-6 rounded-full mx-1`}></li>
                         })
                     }
                 </ul>
@@ -111,7 +114,7 @@ const DetailsProduct = ({ data }: Props) => {
 
             <button
                 onClick={() => {
-                    addToCart({...data, quantity})
+                    addToCart({ ...data, quantity })
                     navigate("/products")
                 }}
                 className='rounded-lg bg-stone-500 mt-5 mb-20 p-2 px-4 text-white'

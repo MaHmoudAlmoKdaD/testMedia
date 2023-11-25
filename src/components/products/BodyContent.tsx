@@ -25,7 +25,6 @@ const BodyContent = (props: Props) => {
     useEffect(() => {
         axios.get('https://course-api.com/react-store-products')
             .then((res) => {
-                console.log(res.data)
                 setData(res.data)
                 setLimitProducts(res.data);
             })

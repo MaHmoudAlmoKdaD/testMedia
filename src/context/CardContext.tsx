@@ -30,6 +30,13 @@ const cartReducer = (state: any, action: { type: string; payload?: any }): any =
           item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item
         ),
       };
+    case 'UPDATE_COLOR':
+      return {
+        ...state,
+        cart: state.cart.map((item: any) =>
+          item.id === action.payload.productId ? { ...item, color: action.payload.color } : item
+        ),
+      };
 
     default:
       return state;
@@ -55,13 +62,18 @@ const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     dispatch({ type: 'DECREASE_QUANTITY', payload: productId });
   };
 
+  const updateColor = (productId: number, color: string) => {
+    dispatch({ type: 'UPDATE_COLOR', payload: { productId, color } });
+  };
+
   return (
     <CartContext.Provider value={{
       cart: state.cart,
       addToCart,
       removeFromCart,
       increaseQuantity,
-      decreaseQuantity
+      decreaseQuantity,
+      updateColor
     }}>
       {children}
     </CartContext.Provider>
