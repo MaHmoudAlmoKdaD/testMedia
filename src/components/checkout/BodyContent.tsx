@@ -11,7 +11,7 @@ type Props = {
 const BodyContent = (props: Props) => {
     const { cart, removeFromCart, decreaseQuantity, increaseQuantity } = useContext(CartContext)!;
     const navigate = useNavigate();
-console.log(cart)
+
     const removeAll = () => {
         for (let index = 0; index < cart.length; index++) {
             const element = cart[index];

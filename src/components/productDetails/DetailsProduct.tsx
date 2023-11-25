@@ -11,7 +11,8 @@ type Props = {
 const DetailsProduct = ({ data }: Props) => {
 
     const [quantity, setQuantity] = useState(1)
-    const { addToCart, updateColor } = useContext(CartContext)!;
+    const [color, setColor] = useState('')
+    const { addToCart } = useContext(CartContext)!;
 
     const navigate = useNavigate();
 
@@ -90,7 +91,7 @@ const DetailsProduct = ({ data }: Props) => {
                     {
                         data && data?.colors?.map((c: string) => {
                             return <li
-                                onClick={() => updateColor(data?.id, c)}
+                                onClick={() => setColor(c)}
                                 style={{ backgroundColor: c }}
                                 className={`cursor-pointer w-6 h-6 rounded-full mx-1`}></li>
                         })
@@ -114,7 +115,7 @@ const DetailsProduct = ({ data }: Props) => {
 
             <button
                 onClick={() => {
-                    addToCart({ ...data, quantity })
+                    addToCart({ ...data, quantity, color })
                     navigate("/products")
                 }}
                 className='rounded-lg bg-stone-500 mt-5 mb-20 p-2 px-4 text-white'

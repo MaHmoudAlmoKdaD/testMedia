@@ -17,7 +17,6 @@ const BodyContent = () => {
         const getData = () => {
             axios.get(`https://course-api.com/react-store-single-product?id=${id}`)
                 .then(res => {
-                    console.log(res?.data)
                     setData(res?.data)
                 })
                 .catch(err => console.log(err))
