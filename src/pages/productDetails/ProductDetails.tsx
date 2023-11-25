@@ -12,7 +12,7 @@ const ProjectDetails = () => {
   return (
     <div className='w-full'>
       <Header />
-      <NavigationBar />
+      <NavigationBar titleProduct="product" />
       <BodyContent />
     </div>
   )

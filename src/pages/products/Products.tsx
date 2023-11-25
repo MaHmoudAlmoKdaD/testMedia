@@ -9,7 +9,7 @@ const Products = () => {
   return (
     <div className='w-full'>
       <Header />
-      <NavigationBar />
+      <NavigationBar titleProduct='Products' />
       <BodyContent />
     </div>
   )

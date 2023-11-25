@@ -7,14 +7,14 @@ import React, { useContext } from 'react'
 type Props = {}
 
 const Checkout = (props: Props) => {
-    
+
 
 
     return (
         <div className='w-full'>
             <Header />
-            <NavigationBar />
-            <BodyContent/>
+            <NavigationBar checkout={true} />
+            <BodyContent />
         </div>
     )
 }

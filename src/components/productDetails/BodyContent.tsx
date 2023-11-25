@@ -39,7 +39,7 @@ const BodyContent = () => {
                 <button
                     onClick={() => navigate(-1)}
                     className='rounded-lg bg-stone-500 p-2 text-white'
-                >Back to products</button>
+                >BACK TO PRODUCTS</button>
 
                 <div className='lg:flex w-full'>
                     <div className='w-full lg:w-1/2 lg:pr-20'>
